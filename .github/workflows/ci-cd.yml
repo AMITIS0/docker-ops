@@ -30,12 +30,12 @@ jobs:
     - name: Login to Docker Hub
       uses: docker/login-action@v3
       with:
-        username: YOUR_DOCKER_USERNAME # نام کاربری Docker Hub خود را اینجا وارد کنید
-        password: YOUR_DOCKER_PASSWORD # رمز عبور Docker Hub خود را اینجا وارد کنید
+        username: ${{ secrets.DOCKER_USERNAME }} # نام کاربری Docker Hub شما (از GitHub Secrets)
+        password: ${{ secrets.DOCKER_PASSWORD }} # رمز عبور Docker Hub شما (از GitHub Secrets)
         
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
-        context: .
-        push: true
-        tags: YOUR_DOCKER_USERNAME/ops-node-app:latest # نام کاربری Docker Hub خود را اینجا وارد کنید
+        context: . # مسیر Dockerfile (نقطه به معنی ریشه پروژه)
+        push: true # ایمیج را به Docker Hub پوش کن
+        tags: ${{ secrets.DOCKER_USERNAME }}/ops-node-app:latest # تگ ایمیج: نام کاربری/نام ایمیج:تگ

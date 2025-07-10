@@ -1,8 +1,13 @@
-
-FROM python:3.9-slim-buster
+FROM node:20-alpine
 
 WORKDIR /app
 
-COPY . /app
+COPY package*.json ./
 
-CMD ["python", "app.py"]
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["node", "app.js"]
