@@ -31,7 +31,7 @@ jobs:
       uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKER_USERNAME }} # نام کاربری Docker Hub شما
-        password: ${{ secrets.DOCKER_PASSWORD }} # رمز عبور Docker Hub شما (به عنوان Secret در GitHub)
+        password: ${{ secrets.docker-pass}} # رمز عبور Docker Hub شما (به عنوان Secret در GitHub)
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
