@@ -22,9 +22,7 @@ jobs:
         node-version: '20'
 
     - name: Install dependencies
-      working-directory: ./my-nodejs-app/ # مسیر صحیح به پوشه حاوی package.json
       run: npm install
 
     - name: Run tests
-      working-directory: ./my-nodejs-app/ # مسیر صحیح به پوشه حاوی package.json
       run: npm test
