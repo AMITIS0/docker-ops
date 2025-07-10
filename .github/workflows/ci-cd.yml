@@ -1,0 +1,28 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main  # یا master، بستگی به نام شاخه اصلی شما دارد
+  pull_request:
+    branches:
+      - main  # یا master
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest # سیستم عاملی که Workflow روی آن اجرا می‌شود
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4 # اکشن برای دریافت کد از ریپازیتوری
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20' # نسخه Node.js مورد نظر شما
+
+    - name: Install dependencies
+      run: npm install # یا yarn install برای پروژه‌های Node.js
+
+    - name: Run tests
+      run: npm test # یا yarn test، دستوری که تست‌های شما را اجرا می‌کند
