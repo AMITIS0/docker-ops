@@ -27,15 +27,16 @@ jobs:
     - name: Run tests
       run: npm test
 
-    - name: Login to Docker Hub
+    - name: Login to GitHub Container Registry # مرحله لاگین به GHCR
       uses: docker/login-action@v3
       with:
-        username: ${{ secrets.DOCKER_USERNAME }} # نام کاربری Docker Hub شما (از GitHub Secrets)
-        password: ${{ secrets.DOCKER_PASSWORD }} # رمز عبور Docker Hub شما (از GitHub Secrets)
-        
-    - name: Build and push Docker image
+        registry: ghcr.io # آدرس رجیستری GHCR
+        username: ${{ github.actor }} # نام کاربری GitHub شما (به صورت خودکار)
+        password: ${{ secrets.GITHUB_TOKEN }} # توکن GitHub (به صورت خودکار)
+
+    - name: Build and push Docker image to GHCR # ساخت و پوش ایمیج به GHCR
       uses: docker/build-push-action@v5
       with:
-        context: . # مسیر Dockerfile (نقطه به معنی ریشه پروژه)
-        push: true # ایمیج را به Docker Hub پوش کن
-        tags: ${{ secrets.DOCKER_USERNAME }}/ops-node-app:latest # تگ ایمیج: نام کاربری/نام ایمیج:تگ
+        context: .
+        push: true
+        tags: ghcr.io/${{ github.repository }}/ops-node-app:latest # تگ ایمیج: ghcr.io/نام کاربری گیت‌هاب/نام ریپازیتوری/نام ایمیج:تگ
