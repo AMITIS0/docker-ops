@@ -27,15 +27,15 @@ jobs:
     - name: Run tests
       run: npm test
 
-    - name: Login to Docker Hub # اگر قصد دارید ایمیج را به Docker Hub پوش کنید، این مرحله لازم است
+    - name: Login to Docker Hub
       uses: docker/login-action@v3
       with:
-        username: ${{ secrets.DOCKER_USERNAME }} # نام کاربری Docker Hub شما
-        password: ${{ secrets.docker-pass}} # رمز عبور Docker Hub شما (به عنوان Secret در GitHub)
-
+        username: YOUR_DOCKER_USERNAME # نام کاربری Docker Hub خود را اینجا وارد کنید
+        password: YOUR_DOCKER_PASSWORD # رمز عبور Docker Hub خود را اینجا وارد کنید
+        
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
-        context: . # مسیری که Dockerfile در آن قرار دارد (نقطه به معنی ریشه پروژه)
-        push: true # مشخص می‌کند که ایمیج باید به Docker Hub پوش شود
-        tags: ${{ secrets.DOCKER_USERNAME }}/ops-node-app:latest # تگ برای ایمیج (نام کاربری/نام ایمیج:تگ)
+        context: .
+        push: true
+        tags: YOUR_DOCKER_USERNAME/ops-node-app:latest # نام کاربری Docker Hub خود را اینجا وارد کنید
